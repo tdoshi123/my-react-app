@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 
 function Header() {
   return (
     <header style={styles.header}>
-      <h1>Welcome to Tirth Doshi's Profile</h1>
+      <nav style={styles.nav}>
+        <a href="#home" style={styles.navLink}>
+          Home
+        </a>
+        <a href="#about" style={styles.navLink}>
+          About
+        </a>
+        <a href="#profiles" style={styles.navLink}>
+          Profiles
+        </a>
+      </nav>
+      <h1 style={styles.title}>Profile App</h1>
     </header>
   );
 }
@@ -12,72 +23,66 @@ function Header() {
 function Introduction() {
   return (
     <section style={styles.introduction}>
-      <h2>About Me</h2>
+      <h2>About</h2>
       <p>
-        Hi, I'm Tirth Doshi! I enjoy coding, learning about new technologies,
-        and building awesome projects. Explore the cards below to learn more
-        about me.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
       </p>
     </section>
   );
 }
 
-function Card({ title, description }) {
+function App() {
   return (
-    <div style={styles.card}>
-      <h3>{title}</h3>
-      <p>{description}</p>
+    <div style={styles.app}>
+      <Header />
+      <Introduction />
     </div>
   );
 }
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  const cardsData = [
-    { title: "Skills", description: "JavaScript, React, and more." },
-    { title: "Hobbies", description: "Reading, Coding, and Traveling." },
-    { title: "Contact", description: "Email: tirth@example.com" },
-  ];
-
-  return (
-    <>
-      <Header />
-      <Introduction />
-      <section style={styles.cardsContainer}>
-        {cardsData.map((card, index) => (
-          <Card key={index} title={card.title} description={card.description} />
-        ))}
-      </section>
-    </>
-  );
-}
-
 const styles = {
-  header: {
-    padding: "1rem",
-    backgroundColor: "#4CAF50",
+  app: {
+    backgroundColor: "#2E2E2E", // Dark grey background
     color: "white",
-    textAlign: "center",
+    minHeight: "100vh",
+    margin: 0,
+    fontFamily: "Arial, sans-serif",
   },
-  introduction: {
+  header: {
+    backgroundColor: "#5A5DF4", // Blue header background
     padding: "1rem",
     textAlign: "center",
-    backgroundColor: "#f9f9f9",
-    marginBottom: "1rem",
   },
-  card: {
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "1rem",
-    margin: "0.5rem",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  },
-  cardsContainer: {
+  nav: {
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap",
-    padding: "1rem",
+    gap: "1rem",
+    marginBottom: "1rem",
+  },
+  navLink: {
+    color: "white",
+    textDecoration: "none",
+    fontSize: "1rem",
+  },
+  title: {
+    margin: 0,
+    fontSize: "2rem",
+    fontWeight: "bold",
+  },
+  introduction: {
+    padding: "2rem",
+    textAlign: "center",
+    backgroundColor: "#3B3B3B", // Slightly lighter grey for the introduction section
+    borderRadius: "8px",
+    margin: "2rem auto",
+    width: "80%",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
   },
 };
 
