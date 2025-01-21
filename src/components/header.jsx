@@ -10,12 +10,13 @@ const Header = ({ title, links }) => {
           </a>
         ))}
       </nav>
-      <h1 className="title" style={styles.title}>{title}</h1>
+      <div className="header-content" style={styles.headerContent}>
+        <h1 className="title" style={styles.title}>{title}</h1>
+      </div>
     </header>
   );
 };
 
-// Inline styles (fallback if no CSS classes)
 const styles = {
   header: {
     backgroundColor: "#5A5DF4",
@@ -32,6 +33,9 @@ const styles = {
     color: "white",
     textDecoration: "none",
     fontSize: "1rem",
+  },
+  headerContent: {
+    marginTop: "1rem",
   },
   title: {
     margin: 0,

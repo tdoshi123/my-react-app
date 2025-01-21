@@ -21,11 +21,12 @@ const styles = {
   },
   heading: {
     fontSize: "1.5rem",
-    marginBottom: "1rem",
+    marginBottom: "1.5rem",
+    fontWeight: "bold",
   },
   paragraph: {
     fontSize: "1rem",
-    lineHeight: "1.5",
+    lineHeight: "1.75",
   },
 };
 
