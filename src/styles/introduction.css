@@ -1,0 +1,20 @@
+.introduction {
+    padding: 2rem;
+    text-align: center;
+    background-color: #3B3B3B;
+    border-radius: 8px;
+    margin: 2rem auto;
+    width: 80%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.intro-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.intro-paragraph {
+    font-size: 1rem;
+    line-height: 1.75;
+}
