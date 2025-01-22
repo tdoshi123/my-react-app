@@ -1,0 +1,27 @@
+.card1 {
+    border-radius: 8px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #3B3B3B;
+    margin: 20px;
+  }
+  
+  .card1 img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .card1 h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+  }
+  
+  .card1 p {
+    font-size: 14px;
+    color: #555;
+  }  
