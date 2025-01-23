@@ -25,3 +25,25 @@ body {
   margin-top: 20px;
   margin-bottom: 40px;
 }
+
+.contact-us {
+  border-radius: 8px;
+  padding: 20px;
+  width: 60%;
+  text-align: center;
+  margin: 20px auto;
+  background-color: #3E3E3E;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-us h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.contact-us p {
+  font-size: 1rem;
+  color: #D3D3D3;
+}

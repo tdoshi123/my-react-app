@@ -1,9 +1,10 @@
 import React from "react";
-import "./styles/app.css";
-import "./styles/card1.css";
-import "./styles/card2.css";
+import "./app.css";
 import Header from "./components/header";
 import Introduction from "./components/introduction";
+import Wrapper from "./components/wrapper";
+import Card from "./components/card";
+import ContactUs from "./components/contactus";
 import johnDoeImage from "./assets/images/no-dp_16.webp";
 
 function App() {
@@ -15,25 +16,51 @@ function App() {
 
   const introContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
+  const cardData = [
+    {
+      image: johnDoeImage,
+      name: "John Doe",
+      role: "Web Developer",
+      email: "john.doe@example.com",
+    },
+    {
+      image: johnDoeImage,
+      name: "Eva Smith",
+      role: "UX Designer",
+      email: "eva.smith@example.com",
+    },
+    {
+      image: johnDoeImage,
+      name: "Tirth Doshi",
+      role: "Student",
+      email: "tdoshi@purdue.edu",
+    }
+  ];
+
   return (
     <div className="app">
       <Header links={navLinks} />
       <h1 className="title">Profile App</h1>
       <Introduction heading="About" content={introContent} />
 
-      <div className="profiles-container">
-        <div className="profile-card card1">
-          <img src={johnDoeImage} alt="John Doe" />
-          <h3>John Doe</h3>
-          <p>Web Developer</p>
-        </div>
+      <Wrapper>
+        {cardData.map((card, index) => (
+          <Card
+            key={index}
+            image={card.image}
+            name={card.name}
+            role={card.role}
+            email={card.email}
+          />
+        ))}
+      </Wrapper>
 
-        <div className="profile-card card2">
-          <img src={johnDoeImage} alt="Eva Smith" />
-          <h3>Eva Smith</h3>
-          <p>UX Designer</p>
-        </div>
-      </div>
+      <Wrapper>
+        <ContactUs
+          heading="Contact Us"
+          message="We'd love to hear any suggestions from our loyal customers! Please reach out to tdoshi@purdue.edu concerning any inquiries."
+        />
+      </Wrapper>
     </div>
   );
 }
