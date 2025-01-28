@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./app.css";
 import Header from "./components/header";
 import Introduction from "./components/introduction";
@@ -34,8 +34,30 @@ function App() {
       name: "Tirth Doshi",
       role: "Student",
       email: "tdoshi@purdue.edu",
-    }
+    },
+    {
+      image: johnDoeImage,
+      name: "Billy Bob",
+      role: "Student",
+      email: "bbob@purdue.edu",
+    },
   ];
+
+  const [selectedRole, setSelectedRole] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredCards = cardData
+    .filter((card) =>
+      selectedRole === "All" ? true : card.role === selectedRole
+  )
+    .filter((card) =>
+      card.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleClear = () => {
+    setSelectedRole("All");
+    setSearchQuery("");
+  };
 
   return (
     <div className="app">
@@ -44,7 +66,35 @@ function App() {
       <Introduction heading="About" content={introContent} />
 
       <Wrapper>
-        {cardData.map((card, index) => (
+        <div className="filter-container">
+          <label htmlFor="role-filter">Filter by Role:</label>
+          <select
+            id="role-filter"
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="UX Designer">UX Designer</option>
+            <option value="Student">Student</option>
+          </select>
+          <label htmlFor="name-search" className="search-label">
+            Search for Name:
+          </label>
+          <input
+            id="name-search"
+            type="text"
+            placeholder="Enter name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-box"
+          />
+          <button onClick={handleClear} className="reset-button">Reset</button>
+        </div>
+      </Wrapper>
+
+      <Wrapper>
+        {filteredCards.map((card, index) => (
           <Card
             key={index}
             image={card.image}
