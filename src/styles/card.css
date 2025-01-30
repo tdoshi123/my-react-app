@@ -1,3 +1,14 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .profile-card {
     border-radius: 8px;
     padding: 20px;
@@ -6,6 +17,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #3B3B3B;
     margin: 20px;
+    border: 2px solid transparent;
+    transition: border 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.profile-card:hover {
+    border: 2px solid #0060fa;
 }
 
 .profile-card img {
@@ -19,15 +39,21 @@
 .profile-card h3 {
     margin: 10px 0 5px;
     font-size: 18px;
+    color: #fff;
 }
 
 .profile-card p {
     font-size: 14px;
-    color: #555;
+    color: #bbb;
 }
 
 .profile-card .email {
     font-size: 14px;
     color: #0060fa;
     margin-top: 5px;
-}  
+    text-decoration: none;
+}
+
+.profile-card .email:hover {
+    text-decoration: underline;
+}
