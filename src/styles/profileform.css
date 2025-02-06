@@ -1,0 +1,67 @@
+.profile-form-container {
+    background-color: #3e3e3e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.profile-form-container h2 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.profile-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-form-container div {
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Ensures inputs are properly centered */
+}
+
+.profile-form-container input,
+.profile-form-container textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #2e2e2e;
+    color: white;
+    outline: none;
+    width: 100%; /* Make inputs and textarea match in width */
+}
+
+.profile-form-container input:focus,
+.profile-form-container textarea:focus {
+    border-color: #0060fa;
+    box-shadow: 0 0 5px rgba(0, 96, 250, 0.5);
+}
+
+.profile-form-container textarea {
+    height: 19px;
+    resize: vertical;
+}
+
+.profile-form-container button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #004bb5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.profile-form-container button:hover {
+    background-color: #003399;
+}

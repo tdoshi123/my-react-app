@@ -6,6 +6,7 @@ import Wrapper from "./components/wrapper";
 import Card from "./components/card";
 import ContactUs from "./components/contactus";
 import johnDoeImage from "./assets/images/no-dp_16.webp";
+import ProfileForm from "./components/profileform";
 
 function App() {
   const navLinks = [
@@ -103,6 +104,10 @@ function App() {
             email={card.email}
           />
         ))}
+      </Wrapper>
+      
+      <Wrapper>
+        <ProfileForm />
       </Wrapper>
 
       <Wrapper>
