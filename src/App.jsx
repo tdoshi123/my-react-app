@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./app.css";
 import Header from "./components/header";
 import Introduction from "./components/introduction";
@@ -17,37 +17,50 @@ function App() {
 
   const introContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-  const cardData = [
+  const [profiles, setProfiles] = useState([]);
+  useEffect(() => {
+    fetch("https://web.ics.purdue.edu/~tdoshi/test/fetch-data.php")
+    .then((res) => res.json())
+    .then((data) => {
+      setProfiles(data);
+      console.log(data)
+    })
+  },[]);
+  {/*const cardData = [
     {
       image: johnDoeImage,
       name: "John Doe",
       role: "Web Developer",
+      bio: "Passionate about building scalable web applications.",
       email: "john.doe@example.com",
     },
     {
       image: johnDoeImage,
       name: "Eva Smith",
       role: "UX Designer",
+      bio: "Loves creating user-friendly interfaces and experiences.",
       email: "eva.smith@example.com",
     },
     {
       image: johnDoeImage,
       name: "Tirth Doshi",
       role: "Student",
+      bio: "Interested in Business Administration and Software Development.",
       email: "tdoshi@purdue.edu",
     },
     {
       image: johnDoeImage,
       name: "Billy Bob",
       role: "Student",
+      bio: "Aspiring Data Scientist with a passion for AI.",
       email: "bbob@purdue.edu",
     },
-  ];
+  ];*/}  
 
   const [selectedRole, setSelectedRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredCards = cardData
+  const filteredCards = profiles
     .filter((card) =>
       selectedRole === "All" ? true : card.role === selectedRole
   )
@@ -95,12 +108,13 @@ function App() {
       </Wrapper>
 
       <Wrapper>
-        {filteredCards.map((card, index) => (
+        {filteredCards.map((card) => (
           <Card
-            key={index}
-            image={card.image}
+            key={card.id}
+            image={card.image_url}
             name={card.name}
-            role={card.role}
+            role={card.title}
+            bio={card.bio}
             email={card.email}
           />
         ))}

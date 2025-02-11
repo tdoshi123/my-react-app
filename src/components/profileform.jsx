@@ -3,7 +3,7 @@ import "../styles/profileform.css";
 
 const ProfileForm = () => {
   const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
+  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState(null);
@@ -44,7 +44,7 @@ const ProfileForm = () => {
 
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("title", title);
+    formData.append("title", role);
     formData.append("email", email);
     formData.append("bio", bio);
     if (image) {
@@ -92,10 +92,10 @@ const ProfileForm = () => {
         />
         <input
           type="text"
-          name="title"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="role"
+          placeholder="Role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
         />
         <input
           type="email"
@@ -107,7 +107,7 @@ const ProfileForm = () => {
         />
         <textarea
           name="bio"
-          placeholder="Some Description"
+          placeholder="Bio"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           required

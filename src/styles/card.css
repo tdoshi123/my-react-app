@@ -57,3 +57,9 @@
 .profile-card .email:hover {
     text-decoration: underline;
 }
+
+.profile-card .bio {
+    font-size: 14px;
+    color: #ddd;
+    margin-top: 5px;
+}
