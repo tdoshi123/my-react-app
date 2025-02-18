@@ -1,15 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./../styles/navbar.css";
 
-const Header = ({ links }) => {
+const Header = () => {
   return (
     <header className="header">
       <nav className="nav">
-        {links.map((link, index) => (
-          <a key={index} href={link.href} className="nav-link">
-            {link.label}
-          </a>
-        ))}
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/about" className="nav-link">About</Link>
+        <Link to="/add-profile" className="nav-link">Add Profile</Link>
       </nav>
     </header>
   );

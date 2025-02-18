@@ -4,6 +4,12 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   min-height: 0;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
 }
 
 .app {
@@ -113,4 +119,38 @@ body {
 
 .reset-button:hover {
   background-color: #004bb5;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #3E3E3E;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #004bb5;
+}
+
+.pagination button:disabled {
+  background-color: #2E2E2E;
+  cursor: not-allowed;
+  color: #777;
+}
+
+.pagination span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
 }

@@ -25,7 +25,7 @@
 .profile-form-container div {
     display: flex;
     flex-direction: column;
-    width: 80%; /* Ensures inputs are properly centered */
+    width: 80%;
 }
 
 .profile-form-container input,
@@ -37,7 +37,7 @@
     background-color: #2e2e2e;
     color: white;
     outline: none;
-    width: 100%; /* Make inputs and textarea match in width */
+    width: 100%;
 }
 
 .profile-form-container input:focus,
