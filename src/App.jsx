@@ -26,43 +26,13 @@ function App() {
       console.log(data)
     })
   },[]);
-  {/*const cardData = [
-    {
-      image: johnDoeImage,
-      name: "John Doe",
-      role: "Web Developer",
-      bio: "Passionate about building scalable web applications.",
-      email: "john.doe@example.com",
-    },
-    {
-      image: johnDoeImage,
-      name: "Eva Smith",
-      role: "UX Designer",
-      bio: "Loves creating user-friendly interfaces and experiences.",
-      email: "eva.smith@example.com",
-    },
-    {
-      image: johnDoeImage,
-      name: "Tirth Doshi",
-      role: "Student",
-      bio: "Interested in Business Administration and Software Development.",
-      email: "tdoshi@purdue.edu",
-    },
-    {
-      image: johnDoeImage,
-      name: "Billy Bob",
-      role: "Student",
-      bio: "Aspiring Data Scientist with a passion for AI.",
-      email: "bbob@purdue.edu",
-    },
-  ];*/}  
 
   const [selectedRole, setSelectedRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredCards = profiles
     .filter((card) =>
-      selectedRole === "All" ? true : card.role === selectedRole
+      selectedRole === "All" ? true : card.title === selectedRole
   )
     .filter((card) =>
       card.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -88,9 +58,9 @@ function App() {
             onChange={(e) => setSelectedRole(e.target.value)}
           >
             <option value="All">All</option>
-            <option value="Web Developer">Web Developer</option>
-            <option value="UX Designer">UX Designer</option>
+            <option value="Professor">Professor</option>
             <option value="Student">Student</option>
+            <option value="TA">TA</option>
           </select>
           <label htmlFor="name-search" className="search-label">
             Search for Name:
