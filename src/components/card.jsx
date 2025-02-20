@@ -1,10 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import "../styles/card.css";
 
-function Card({ image, name, role, bio, email }) {
+function Card({ id, image, name, role, bio, email }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log("Card clicked! ID:", id);
+    navigate(`/profile/${id}`);
+  };
+
   return (
-    <div className="profile-card">
+    <div 
+      className="profile-card" 
+      onClick={handleClick}
+      style={{ cursor: 'pointer' }}
+    >
       <img src={image} alt={name} />
       <h3>{name}</h3>
       <p>{role}</p>
@@ -15,6 +27,7 @@ function Card({ image, name, role, bio, email }) {
 }
 
 Card.propTypes = {
+  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,

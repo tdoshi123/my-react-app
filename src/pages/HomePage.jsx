@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Wrapper from "../components/wrapper";
 import Card from "../components/card";
 
@@ -8,32 +9,30 @@ const HomePage = ({ titles }) => {
     const [profiles, setProfiles] = useState([]);
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
-    const cardsPerPage = 3; // Change this to however many profiles per page you want
+    const cardsPerPage = 3;
 
-    // Fetch all profiles at once and handle pagination on the frontend
     useEffect(() => {
-        fetch(`https://web.ics.purdue.edu/~tdoshi/test/fetch-data-with-filter.php?title=${selectedRole}&name=${searchQuery}`)
+        fetch(`https://web.ics.purdue.edu/~tdoshi/test/fetch-data-with-filter.php?title=${selectedRole}&name=${searchQuery}&limit=20`)
             .then((res) => res.json())
             .then((data) => {
                 setProfiles(data.profiles);
-                setCount(data.profiles.length); // Total number of profiles
-                setPage(1); // Start on the first page
+                setPage(1);
+                console.log(data);
             });
     }, [selectedRole, searchQuery]);
 
     function handleClear() {
         setSelectedRole("");
         setSearchQuery("");
-        setPage(1); // Reset to first page
+        setPage(1);
     }
 
     function changeRole(e) {
         setSelectedRole(e.target.value);
-        setPage(1); // Reset to first page when changing role
+        setPage(1);
     }
 
-    // Pagination Logic
-    const totalPages = Math.ceil(count / cardsPerPage);
+    const totalPages = Math.ceil(profiles.length / cardsPerPage);
     const startIndex = (page - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
     const currentProfiles = profiles.slice(startIndex, endIndex);
@@ -80,18 +79,23 @@ const HomePage = ({ titles }) => {
             </div>
             <Wrapper>
                 {currentProfiles.map((card) => (
-                    <Card
+                    <Link 
+                        to={`/profile/${card.id}`} 
                         key={card.id}
-                        image={card.image_url}
-                        name={card.name}
-                        role={card.title}
-                        bio={card.bio}
-                        email={card.email}
-                    />
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <Card
+                            id={card.id}
+                            image={card.image_url}
+                            name={card.name}
+                            role={card.title}
+                            bio={card.bio}
+                            email={card.email}
+                        />
+                    </Link>
                 ))}
             </Wrapper>
 
-            {/* Pagination Controls */}
             <div className="pagination">
                 <button onClick={handleBack} disabled={page === 1}>
                     Back

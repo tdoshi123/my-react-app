@@ -5,6 +5,9 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AddProfile from "./pages/AddProfile";
 import NotFound from "./pages/NotFound";
+import ProfileDetailPage from "./pages/ProfileDetailPage";
+import ProfileEditPage from "./pages/ProfileEditPage";
+import ProfileLayoutPage from "./pages/ProfileLayoutPage";
 import "./app.css";
 
 function App() {
@@ -25,6 +28,10 @@ function App() {
           <Route path="/" element={<HomePage titles={titles}/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/add-profile" element={<AddProfile />} />
+          <Route path="profile/:id" element={<ProfileLayoutPage />} >
+            <Route index element={<ProfileDetailPage />} />
+            <Route path="edit" element={<ProfileEditPage />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
@@ -33,3 +40,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

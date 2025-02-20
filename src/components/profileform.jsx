@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/profileform.css";
 
-const ProfileForm = () => {
+const ProfileForm = ({ profile={}, edit=false }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -9,6 +9,15 @@ const ProfileForm = () => {
   const [image, setImage] = useState(null);
   const [imageError, setImageError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  
+  useEffect(() => {
+    if (edit && profile) {
+      setName(profile.name);
+      setRole(profile.title);
+      setEmail(profile.email);
+      setBio(profile.bio); 
+    }
+  }, [profile, edit]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -47,12 +56,13 @@ const ProfileForm = () => {
     formData.append("title", role);
     formData.append("email", email);
     formData.append("bio", bio);
+    formData.append("id", profile.id);
     if (image) {
       formData.append("image", image);
     }
 
     try {
-      const response = await fetch("http://web.ics.purdue.edu/~tdoshi/test/send-data.php", {
+      const response = await fetch(`http://web.ics.purdue.edu/~tdoshi/test/send-data-with-id.php?id=${profile.id}`, {
         method: "POST",
         body: formData,
       });
