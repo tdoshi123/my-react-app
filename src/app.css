@@ -1,10 +1,19 @@
 body {
-  background-color: #2E2E2E;
-  color: white;
   margin: 0;
   font-family: Arial, sans-serif;
   min-height: 0;
   height: 100%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  background-color: #2E2E2E;
+  color: white;
+}
+
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 html {
@@ -14,6 +23,17 @@ html {
 
 .app {
   text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app.dark-mode {
+  background-color: #2E2E2E;
+  color: white;
+}
+
+.app.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 .title {
@@ -38,20 +58,43 @@ html {
   width: 60%;
   text-align: center;
   margin: 20px auto;
-  background-color: #3E3E3E;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
+}
+
+.dark-mode .contact-us {
+  background-color: #3E3E3E;
+}
+
+.light-mode .contact-us {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-us h2 {
   margin-bottom: 10px;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.dark-mode .contact-us h2 {
   color: white;
+}
+
+.light-mode .contact-us h2 {
+  color: #333;
 }
 
 .contact-us p {
   font-size: 1rem;
+}
+
+.dark-mode .contact-us p {
   color: #D3D3D3;
+}
+
+.light-mode .contact-us p {
+  color: #666;
 }
 
 .filter-container {
@@ -65,7 +108,6 @@ html {
 .filter-container label {
   font-size: 1rem;
   font-weight: bold;
-  color: white;
 }
 
 .filter-container select {
@@ -73,11 +115,19 @@ html {
   font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: #3E3E3E;
-  color: white;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+}
+
+.dark-mode .filter-container select {
+  background-color: #3E3E3E;
+  color: white;
+}
+
+.light-mode .filter-container select {
+  background-color: #ffffff;
+  color: #333;
 }
 
 .filter-container select:focus {
@@ -85,9 +135,14 @@ html {
   box-shadow: 0 0 5px rgba(0, 96, 250, 0.5);
 }
 
-.filter-container select option {
+.dark-mode .filter-container select option {
   background-color: #2E2E2E;
   color: white;
+}
+
+.light-mode .filter-container select option {
+  background-color: #ffffff;
+  color: #333;
 }
 
 .search-box {
@@ -95,10 +150,18 @@ html {
   font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+}
+
+.dark-mode .search-box {
   background-color: #3E3E3E;
   color: white;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.light-mode .search-box {
+  background-color: #ffffff;
+  color: #333;
 }
 
 .search-box:focus {
@@ -109,16 +172,25 @@ html {
 .reset-button {
   padding: 10px 15px;
   font-size: 1rem;
-  background-color: #3E3E3E;
-  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.dark-mode .reset-button {
+  background-color: #3E3E3E;
+  color: white;
+}
+
+.light-mode .reset-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
 .reset-button:hover {
   background-color: #004bb5;
+  color: white;
 }
 
 .pagination {
@@ -132,25 +204,41 @@ html {
 .pagination button {
   padding: 8px 16px;
   border: none;
-  background-color: #3E3E3E;
-  color: white;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.dark-mode .pagination button {
+  background-color: #3E3E3E;
+  color: white;
+}
+
+.light-mode .pagination button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
 .pagination button:hover {
   background-color: #004bb5;
+  color: white;
 }
 
 .pagination button:disabled {
-  background-color: #2E2E2E;
   cursor: not-allowed;
+}
+
+.dark-mode .pagination button:disabled {
+  background-color: #2E2E2E;
   color: #777;
+}
+
+.light-mode .pagination button:disabled {
+  background-color: #cccccc;
+  color: #999;
 }
 
 .pagination span {
   font-size: 1rem;
   font-weight: bold;
-  color: white;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import HomePage from "./pages/HomePage";
@@ -8,10 +8,13 @@ import NotFound from "./pages/NotFound";
 import ProfileDetailPage from "./pages/ProfileDetailPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import ProfileLayoutPage from "./pages/ProfileLayoutPage";
+import { ModeContext } from "./contexts/ModeContext";
 import "./app.css";
 
 function App() {
   const [titles, setTitles] = useState([]);
+  const { darkMode, toggleDarkMode } = useContext(ModeContext);
+
   useEffect(() => {
     fetch("https://web.ics.purdue.edu/~tdoshi/test/get-titles.php")
       .then((res) => res.json())
@@ -22,8 +25,8 @@ function App() {
 
   return (
     <HashRouter>
-      <div className="app">
-        <Header />
+      <div className={`app ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Routes>
           <Route path="/" element={<HomePage titles={titles}/>} />
           <Route path="/about" element={<AboutPage />} />
@@ -40,7 +43,3 @@ function App() {
 }
 
 export default App;
-
-
-
-

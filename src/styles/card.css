@@ -15,13 +15,21 @@
     width: 240px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #3B3B3B;
     margin: 20px;
     border: 2px solid transparent;
-    transition: border 0.3s ease-in-out;
+    transition: border 0.3s ease-in-out, background-color 0.3s;
     opacity: 0;
     transform: translateY(10px);
     animation: fadeIn 1s ease-in-out forwards;
+}
+
+.dark-mode .profile-card {
+    background-color: #3B3B3B;
+}
+
+.light-mode .profile-card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card:hover {
@@ -39,12 +47,26 @@
 .profile-card h3 {
     margin: 10px 0 5px;
     font-size: 18px;
+}
+
+.dark-mode .profile-card h3 {
     color: #fff;
+}
+
+.light-mode .profile-card h3 {
+    color: #333;
 }
 
 .profile-card p {
     font-size: 14px;
+}
+
+.dark-mode .profile-card p {
     color: #bbb;
+}
+
+.light-mode .profile-card p {
+    color: #666;
 }
 
 .profile-card .email {
@@ -60,6 +82,13 @@
 
 .profile-card .bio {
     font-size: 14px;
-    color: #ddd;
     margin-top: 5px;
+}
+
+.dark-mode .profile-card .bio {
+    color: #ddd;
+}
+
+.light-mode .profile-card .bio {
+    color: #444;
 }
