@@ -1,0 +1,111 @@
+.login-container,
+.register-container {
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.dark-mode .login-container,
+.dark-mode .register-container {
+    background-color: #3e3e3e;
+}
+
+.light-mode .login-container,
+.light-mode .register-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-container div,
+.register-container div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.login-container input,
+.register-container input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode .login-container input,
+.dark-mode .register-container input {
+    background-color: #2e2e2e;
+    color: white;
+}
+
+.light-mode .login-container input,
+.light-mode .register-container input {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.login-container input:focus,
+.register-container input:focus {
+    border-color: #0060fa;
+    box-shadow: 0 0 5px rgba(0, 96, 250, 0.5);
+}
+
+.login-container button,
+.register-container button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #004bb5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.login-container button:hover,
+.register-container button:hover {
+    background-color: #003399;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+.success-message {
+    color: #4caf50;
+    font-size: 0.9rem;
+}
+
+.login-container p,
+.register-container p {
+    margin-top: 15px;
+    color: inherit;
+}
+
+.login-container a,
+.register-container a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.login-container a:hover,
+.register-container a:hover {
+    opacity: 0.8;
+}

@@ -51,7 +51,7 @@ const HomePage = ({ titles }) => {
 
     return (
         <div>
-            <h1>Home Page</h1>
+            <h1>Home</h1>
             <div className="filter-container">
                 <label htmlFor="role-filter">Filter by Role:</label>
                 <select

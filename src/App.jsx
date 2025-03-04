@@ -8,6 +8,9 @@ import NotFound from "./pages/NotFound";
 import ProfileDetailPage from "./pages/ProfileDetailPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import ProfileLayoutPage from "./pages/ProfileLayoutPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { ModeContext } from "./contexts/ModeContext";
 import "./app.css";
 
@@ -30,7 +33,13 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage titles={titles}/>} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/add-profile" element={<AddProfile />} />
+          <Route path="/add-profile" element={
+            <ProtectedRoute>
+              <AddProfile />
+            </ProtectedRoute>
+          } />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="profile/:id" element={<ProfileLayoutPage />} >
             <Route index element={<ProfileDetailPage />} />
             <Route path="edit" element={<ProfileEditPage />} />
