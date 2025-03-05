@@ -37,7 +37,7 @@ useEffect(() => {
 
   return (
     <div>
-      <h1>Edit Profile Page</h1>
+      <h1>Edit Profile</h1>
       <button onClick={handleDelete}>Delete Profile</button>
       <ProfileForm profile={profile} edit={true} />
     </div>

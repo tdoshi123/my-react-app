@@ -42,7 +42,11 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="profile/:id" element={<ProfileLayoutPage />} >
             <Route index element={<ProfileDetailPage />} />
-            <Route path="edit" element={<ProfileEditPage />} />
+            <Route path="edit" element={
+              <ProtectedRoute>
+                <ProfileEditPage />
+              </ProtectedRoute>
+            } />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

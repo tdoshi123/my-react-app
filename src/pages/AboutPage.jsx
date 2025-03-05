@@ -5,7 +5,7 @@ const AboutPage = () => {
   const introContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit...";
   return (
     <div>
-      <h1>About Page</h1>
+      <h1>About</h1>
       <Introduction heading="About" content={introContent} />
     </div>
   );

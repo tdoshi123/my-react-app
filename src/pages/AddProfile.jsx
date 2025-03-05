@@ -4,7 +4,7 @@ import ProfileForm from "../components/profileform";
 const AddProfile = () => {
   return (
     <div>
-      <h1>Add Profile Page</h1>
+      <h1>Add Profile</h1>
       <ProfileForm />
     </div>
   );
