@@ -1,51 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../components/wrapper";
 import Card from "../components/card";
 
+const filterReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_ROLE':
+      return { ...state, selectedRole: action.payload, page: 1 };
+    case 'SET_SEARCH':
+      return { ...state, searchQuery: action.payload, page: 1 };
+    case 'SET_PAGE':
+      return { ...state, page: action.payload };
+    case 'RESET_FILTERS':
+      return { ...state, selectedRole: "", searchQuery: "", page: 1 };
+    default:
+      return state;
+  }
+};
+
 const HomePage = ({ titles }) => {
-    const [selectedRole, setSelectedRole] = useState("");
-    const [searchQuery, setSearchQuery] = useState("");
+    const [filterState, dispatch] = useReducer(filterReducer, {
+        selectedRole: "",
+        searchQuery: "",
+        page: 1
+    });
     const [profiles, setProfiles] = useState([]);
-    const [page, setPage] = useState(1);
-    const [count, setCount] = useState(0);
     const cardsPerPage = 3;
 
     useEffect(() => {
-        fetch(`https://web.ics.purdue.edu/~tdoshi/test/fetch-data-with-filter.php?title=${selectedRole}&name=${searchQuery}&limit=20`)
+        fetch(`https://web.ics.purdue.edu/~tdoshi/test/fetch-data-with-filter.php?title=${filterState.selectedRole}&name=${filterState.searchQuery}&limit=20`)
             .then((res) => res.json())
             .then((data) => {
                 setProfiles(data.profiles);
-                setPage(1);
-                console.log(data);
             });
-    }, [selectedRole, searchQuery]);
+    }, [filterState.selectedRole, filterState.searchQuery]);
 
-    function handleClear() {
-        setSelectedRole("");
-        setSearchQuery("");
-        setPage(1);
-    }
-
-    function changeRole(e) {
-        setSelectedRole(e.target.value);
-        setPage(1);
-    }
+    const handleClear = () => {
+        dispatch({ type: 'RESET_FILTERS' });
+    };
 
     const totalPages = Math.ceil(profiles.length / cardsPerPage);
-    const startIndex = (page - 1) * cardsPerPage;
+    const startIndex = (filterState.page - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
     const currentProfiles = profiles.slice(startIndex, endIndex);
 
     const handleNext = () => {
-        if (page < totalPages) {
-            setPage(page + 1);
+        if (filterState.page < totalPages) {
+            dispatch({ type: 'SET_PAGE', payload: filterState.page + 1 });
         }
     };
 
     const handleBack = () => {
-        if (page > 1) {
-            setPage(page - 1);
+        if (filterState.page > 1) {
+            dispatch({ type: 'SET_PAGE', payload: filterState.page - 1 });
         }
     };
 
@@ -56,8 +63,8 @@ const HomePage = ({ titles }) => {
                 <label htmlFor="role-filter">Filter by Role:</label>
                 <select
                     id="role-filter"
-                    value={selectedRole}
-                    onChange={changeRole}
+                    value={filterState.selectedRole}
+                    onChange={(e) => dispatch({ type: 'SET_ROLE', payload: e.target.value })}
                 >
                     <option value="">All</option>
                     {titles.map((card) => (
@@ -71,8 +78,8 @@ const HomePage = ({ titles }) => {
                     id="name-search"
                     type="text"
                     placeholder="Enter name"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={filterState.searchQuery}
+                    onChange={(e) => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
                     className="search-box"
                 />
                 <button onClick={handleClear} className="reset-button">Reset</button>
@@ -97,13 +104,13 @@ const HomePage = ({ titles }) => {
             </Wrapper>
 
             <div className="pagination">
-                <button onClick={handleBack} disabled={page === 1}>
+                <button onClick={handleBack} disabled={filterState.page === 1}>
                     Back
                 </button>
                 <span>
-                    Page {page} of {totalPages}
+                    Page {filterState.page} of {totalPages}
                 </span>
-                <button onClick={handleNext} disabled={page === totalPages}>
+                <button onClick={handleNext} disabled={filterState.page === totalPages}>
                     Next
                 </button>
             </div>

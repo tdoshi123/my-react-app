@@ -25,11 +25,11 @@ const Header = () => {
         localStorage.removeItem("username");
         navigate("/");
       } else {
-        alert("Logout failed. Please try again."); // Keep error alerts for failed logout attempts
+        alert("Logout failed. Please try again.");
       }
     } catch (error) {
       console.error("Logout error:", error);
-      alert("Logout failed. Please check your connection and try again."); // Keep error alerts for failed logout attempts
+      alert("Logout failed. Please check your connection and try again.");
     }
   };
 
@@ -38,7 +38,7 @@ const Header = () => {
       <nav className="nav">
         <div className="nav-brand">
           <img src="/my-react-app/favicon-32x32.png" alt="Logo" className="nav-logo" />
-          <span className="nav-title">Home</span>
+          <span className="nav-title">Profile Directory</span>
         </div>
         
         <div className="nav-right">

@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-left: 1rem;  /* Added margin for more space on the left */
+    margin-left: 1rem;
 }
 
 .nav-logo {
@@ -39,7 +39,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-right: 1rem;  /* Add margin to move elements closer to right edge */
+    margin-right: 1rem;
 }
 
 .nav-links {
@@ -57,7 +57,6 @@
     position: relative;
 }
 
-/* Active link styling only */
 .nav-link.active::after {
     content: '';
     position: absolute;
@@ -69,7 +68,7 @@
 }
 
 .nav-link:last-child {
-    margin-right: 0.5rem;  /* Add small margin before the mode toggle */
+    margin-right: 0.5rem;
 }
 
 .mode-toggle {
@@ -93,9 +92,9 @@
   cursor: pointer;
   font-size: inherit;
   padding: 0;
-  color: white !important; /* Force white color in both modes */
+  color: white !important;
   font-family: inherit;
-  font-weight: bold; /* Match the other nav links */
+  font-weight: bold;
 }
 
 .logout-button:hover {

@@ -35,11 +35,11 @@ const LoginPage = () => {
         localStorage.setItem("username", username);
         navigate(location.state?.from || "/");
       } else {
-        alert(data.error); // Keep error alerts for failed login attempts
+        alert(data.error);
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Login failed. Please try again."); // Keep error alerts for failed login attempts
+      alert("Login failed. Please try again.");
     }
   };
 
