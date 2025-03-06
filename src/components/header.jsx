@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ModeContext } from "../contexts/ModeContext";
+import { useMode } from "../contexts/ModeContext";
+import { useAuth } from "../contexts/AuthContext";
 import "./../styles/navbar.css";
 
 const Header = () => {
-  const { darkMode, toggleDarkMode } = useContext(ModeContext);
+  const { darkMode, toggleDarkMode } = useMode();
+  const { isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const isLogin = localStorage.getItem("isLogin") === "true";
   
   const handleLogout = async () => {
     try {
@@ -21,8 +22,7 @@ const Header = () => {
       const data = await response.json();
       
       if (data.message) {
-        localStorage.removeItem("isLogin");
-        localStorage.removeItem("username");
+        logout(); // Use the context's logout function
         navigate("/");
       } else {
         alert("Logout failed. Please try again.");
@@ -49,12 +49,12 @@ const Header = () => {
             <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}>
               About
             </Link>
-            {isLogin && (
+            {isLoggedIn && (
               <Link to="/add-profile" className={`nav-link ${location.pathname === '/add-profile' ? 'active' : ''}`}>
                 Add Profile
               </Link>
             )}
-            {isLogin ? (
+            {isLoggedIn ? (
               <button onClick={handleLogout} className="nav-link logout-button">
                 Logout
               </button>

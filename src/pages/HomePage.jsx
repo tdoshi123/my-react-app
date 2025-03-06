@@ -1,7 +1,8 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { useReducer } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../components/wrapper";
 import Card from "../components/card";
+import { useProfiles } from "../hooks/useProfiles";
 
 const filterReducer = (state, action) => {
   switch (action.type) {
@@ -24,25 +25,21 @@ const HomePage = ({ titles }) => {
         searchQuery: "",
         page: 1
     });
-    const [profiles, setProfiles] = useState([]);
+    
+    const { profiles, loading, error } = useProfiles(
+      filterState.selectedRole, 
+      filterState.searchQuery
+    );
+
     const cardsPerPage = 3;
-
-    useEffect(() => {
-        fetch(`https://web.ics.purdue.edu/~tdoshi/test/fetch-data-with-filter.php?title=${filterState.selectedRole}&name=${filterState.searchQuery}&limit=20`)
-            .then((res) => res.json())
-            .then((data) => {
-                setProfiles(data.profiles);
-            });
-    }, [filterState.selectedRole, filterState.searchQuery]);
-
-    const handleClear = () => {
-        dispatch({ type: 'RESET_FILTERS' });
-    };
-
     const totalPages = Math.ceil(profiles.length / cardsPerPage);
     const startIndex = (filterState.page - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
     const currentProfiles = profiles.slice(startIndex, endIndex);
+
+    const handleClear = () => {
+        dispatch({ type: 'RESET_FILTERS' });
+    };
 
     const handleNext = () => {
         if (filterState.page < totalPages) {
@@ -55,6 +52,9 @@ const HomePage = ({ titles }) => {
             dispatch({ type: 'SET_PAGE', payload: filterState.page - 1 });
         }
     };
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
 
     return (
         <div>

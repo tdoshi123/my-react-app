@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import "../styles/auth.css";
+import { useAuth } from "../contexts/AuthContext";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,8 +33,7 @@ const LoginPage = () => {
       const data = await response.json();
       
       if (data.success) {
-        localStorage.setItem("isLogin", "true");
-        localStorage.setItem("username", username);
+        login({ username }); // Use the context's login function
         navigate(location.state?.from || "/");
       } else {
         alert(data.error);

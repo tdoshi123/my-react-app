@@ -1,6 +1,9 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 
 export const ModeContext = createContext();
+
+// Custom hook to use the mode context
+export const useMode = () => useContext(ModeContext);
 
 export const ModeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
