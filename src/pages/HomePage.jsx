@@ -1,8 +1,13 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback, useMemo, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../components/wrapper";
 import Card from "../components/card";
 import { useProfiles } from "../hooks/useProfiles";
+
+// Lazy load components
+const FilterSection = lazy(() => import("../components/FilterSection"));
+const ProfileList = lazy(() => import("../components/ProfileList"));
+const Pagination = lazy(() => import("../components/Pagination"));
 
 const filterReducer = (state, action) => {
   switch (action.type) {
@@ -19,7 +24,7 @@ const filterReducer = (state, action) => {
   }
 };
 
-const HomePage = ({ titles }) => {
+const HomePage = React.memo(({ titles }) => {
     const [filterState, dispatch] = useReducer(filterReducer, {
         selectedRole: "",
         searchQuery: "",
@@ -32,26 +37,37 @@ const HomePage = ({ titles }) => {
     );
 
     const cardsPerPage = 3;
-    const totalPages = Math.ceil(profiles.length / cardsPerPage);
-    const startIndex = (filterState.page - 1) * cardsPerPage;
-    const endIndex = startIndex + cardsPerPage;
-    const currentProfiles = profiles.slice(startIndex, endIndex);
+    const paginationData = useMemo(() => {
+        const totalPages = Math.ceil(profiles.length / cardsPerPage);
+        const startIndex = (filterState.page - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        const currentProfiles = profiles.slice(startIndex, endIndex);
+        return { totalPages, currentProfiles };
+    }, [profiles, filterState.page]);
 
-    const handleClear = () => {
+    const handleClear = useCallback(() => {
         dispatch({ type: 'RESET_FILTERS' });
-    };
+    }, []);
 
-    const handleNext = () => {
-        if (filterState.page < totalPages) {
+    const handleNext = useCallback(() => {
+        if (filterState.page < paginationData.totalPages) {
             dispatch({ type: 'SET_PAGE', payload: filterState.page + 1 });
         }
-    };
+    }, [filterState.page, paginationData.totalPages]);
 
-    const handleBack = () => {
+    const handleBack = useCallback(() => {
         if (filterState.page > 1) {
             dispatch({ type: 'SET_PAGE', payload: filterState.page - 1 });
         }
-    };
+    }, [filterState.page]);
+
+    const handleRoleChange = useCallback((e) => {
+        dispatch({ type: 'SET_ROLE', payload: e.target.value });
+    }, []);
+
+    const handleSearchChange = useCallback((e) => {
+        dispatch({ type: 'SET_SEARCH', payload: e.target.value });
+    }, []);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -59,63 +75,32 @@ const HomePage = ({ titles }) => {
     return (
         <div>
             <h1>Home</h1>
-            <div className="filter-container">
-                <label htmlFor="role-filter">Filter by Role:</label>
-                <select
-                    id="role-filter"
-                    value={filterState.selectedRole}
-                    onChange={(e) => dispatch({ type: 'SET_ROLE', payload: e.target.value })}
-                >
-                    <option value="">All</option>
-                    {titles.map((card) => (
-                        <option value={card} key={card}>{card}</option>
-                    ))}
-                </select>
-                <label htmlFor="name-search" className="search-label">
-                    Search for Name:
-                </label>
-                <input
-                    id="name-search"
-                    type="text"
-                    placeholder="Enter name"
-                    value={filterState.searchQuery}
-                    onChange={(e) => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
-                    className="search-box"
+            <Suspense fallback={<div>Loading filters...</div>}>
+                <FilterSection 
+                    filterState={filterState}
+                    titles={titles}
+                    onRoleChange={handleRoleChange}
+                    onSearchChange={handleSearchChange}
+                    onClear={handleClear}
                 />
-                <button onClick={handleClear} className="reset-button">Reset</button>
-            </div>
-            <Wrapper>
-                {currentProfiles.map((card) => (
-                    <Link 
-                        to={`/profile/${card.id}`} 
-                        key={card.id}
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <Card
-                            id={card.id}
-                            image={card.image_url}
-                            name={card.name}
-                            role={card.title}
-                            bio={card.bio}
-                            email={card.email}
-                        />
-                    </Link>
-                ))}
-            </Wrapper>
+            </Suspense>
 
-            <div className="pagination">
-                <button onClick={handleBack} disabled={filterState.page === 1}>
-                    Back
-                </button>
-                <span>
-                    Page {filterState.page} of {totalPages}
-                </span>
-                <button onClick={handleNext} disabled={filterState.page === totalPages}>
-                    Next
-                </button>
-            </div>
+            <Suspense fallback={<div>Loading profiles...</div>}>
+                <ProfileList profiles={paginationData.currentProfiles} />
+            </Suspense>
+
+            <Suspense fallback={<div>Loading pagination...</div>}>
+                <Pagination 
+                    page={filterState.page}
+                    totalPages={paginationData.totalPages}
+                    onBack={handleBack}
+                    onNext={handleNext}
+                />
+            </Suspense>
         </div>
     );
-};
+});
+
+HomePage.displayName = 'HomePage';
 
 export default HomePage;
