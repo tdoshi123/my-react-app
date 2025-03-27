@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useMode } from "../contexts/ModeContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleDarkMode } from '../store/modeSlice';
 import { useAuth } from "../contexts/AuthContext";
 import "./../styles/navbar.css";
 
 const Header = () => {
-  const { darkMode, toggleDarkMode } = useMode();
+  const darkMode = useSelector((state) => state.mode.darkMode);
+  const dispatch = useDispatch();
   const { isLoggedIn, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const Header = () => {
       const data = await response.json();
       
       if (data.message) {
-        logout(); // Use the context's logout function
+        logout();
         navigate("/");
       } else {
         alert("Logout failed. Please try again.");
@@ -65,7 +67,7 @@ const Header = () => {
             )}
           </div>
           <button 
-            onClick={toggleDarkMode} 
+            onClick={() => dispatch(toggleDarkMode())} 
             className="mode-toggle"
           >
             {darkMode ? "Light Mode" : "Dark Mode"}

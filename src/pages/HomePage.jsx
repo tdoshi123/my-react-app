@@ -4,7 +4,6 @@ import Wrapper from "../components/wrapper";
 import Card from "../components/card";
 import { useProfiles } from "../hooks/useProfiles";
 
-// Lazy load components
 const FilterSection = lazy(() => import("../components/FilterSection"));
 const ProfileList = lazy(() => import("../components/ProfileList"));
 const Pagination = lazy(() => import("../components/Pagination"));

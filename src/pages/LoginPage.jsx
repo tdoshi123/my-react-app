@@ -33,7 +33,7 @@ const LoginPage = () => {
       const data = await response.json();
       
       if (data.success) {
-        login({ username }); // Use the context's login function
+        login({ username });
         navigate(location.state?.from || "/");
       } else {
         alert(data.error);

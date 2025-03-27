@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import Header from "./components/header";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
@@ -11,13 +12,12 @@ import ProfileLayoutPage from "./pages/ProfileLayoutPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useMode } from "./contexts/ModeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import "./app.css";
 
 function App() {
   const [titles, setTitles] = useState([]);
-  const { darkMode } = useMode();
+  const darkMode = useSelector((state) => state.mode.darkMode);
 
   useEffect(() => {
     fetch("https://web.ics.purdue.edu/~tdoshi/test/get-titles.php")
