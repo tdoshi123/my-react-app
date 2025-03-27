@@ -1,0 +1,1 @@
+import{R as s,j as i,W as t,L as a,C as l}from"./index-315wjYr5.js";const m=s.memo(({profiles:o})=>i.jsx(t,{children:o.map(e=>i.jsx(a,{to:`/profile/${e.id}`,style:{textDecoration:"none"},children:i.jsx(l,{id:e.id,image:e.image_url,name:e.name,role:e.title,bio:e.bio,email:e.email})},e.id))}));m.displayName="ProfileList";export{m as default};
